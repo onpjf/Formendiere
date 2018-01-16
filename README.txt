@@ -1,1 +1,2 @@
-Procédure pour liaison domotique et exterieur. Hergé sur serveur mutualisé OVH
+Procédure pour liaison domotique et exterieur. 
+Hébergé sur serveur mutualisé OVH.
