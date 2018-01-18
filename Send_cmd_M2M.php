@@ -581,6 +581,14 @@ while($obj = $retour->fetch_object())
 			?><td style="text-align:center;"><?echo "<b>Température</b><br>".$obj->cal_calc." <br></td>";
 			?></tr><?
 		break;
+                case "PING":
+			?><tr><?
+			?><td><img align="middle" style="width:50px; height:50px;" src="/collect_data_ipx800/images/c_logotype_temperature.png"/></td>
+			<td style="text-align:center;vertical-align:top"><?echo "<b>".$obj->description."</b></td>";
+			?><td style="text-align:center;"><?echo "<b>Heure du relevé</b><br>".$obj->date_rel."</td>";
+			?><td style="text-align:center;"><?echo "<b>Valeur</b><br>".$obj->val_brute." <br></td>";
+			?></tr><?
+		break;
 		case "COMPTEUR":
 			?><tr><?
 			?><td><img align="middle" style="width:50px; height:50px;" src="/collect_data_ipx800/images/c_logotype_power.png"/></td>
