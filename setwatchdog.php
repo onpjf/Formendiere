@@ -2,7 +2,7 @@
 
 include('admin/connexionDB.php');
 include('Send_cmd_M2M.php');
-//error_reporting(E_ALL);
+error_reporting(E_ALL);
 
 //   Mise à jour 15-dec-2016
 // on vas lire le fichier status.xml pour la date et l'heure
@@ -12,7 +12,7 @@ include('Send_cmd_M2M.php');
 // On ajoute un flag pour éviter d'envoyer systématiquement un email 
 // 
 // 
-echo '<br> Debut setwatchdog : ';
+echo '<br> Debut setwatchdog';
 
 $time0=date("His");        
 $date=date("Ymd");
@@ -49,7 +49,7 @@ if (!$sock = @fsockopen($address, $port_IPX_WEB, $num, $error, 5))
 {
     if ($val_prec == 1) 
     {        
-        mail('karl.bienfait@onpjf.fr', 'Erreur Watchdog', "IPX non joignable " . $commande, $headers);
+        mail('karl.bienfait@onpjf.fr', 'Perte connection Internet Maison', "IPX non joignable " . $commande, $headers);
         $retour = write_trace("Erreur Watchdog" );
         
         $request="UPDATE ".$statut_tpsreel." SET val_brute=0,date_rel=".$time_courante." WHERE nom_appareil='IPX800' and type='PING'";
@@ -68,6 +68,7 @@ else
         $request="UPDATE ".$statut_tpsreel." SET val_brute=1,date_rel=".$time_courante." WHERE nom_appareil='IPX800' and type='PING'";
         $retour=$mysqli->query($request);
         $retour = write_trace("MAJ Flag PING IPX800 = 1");
+        mail('karl.bienfait@onpjf.fr', 'Retour connection internet Maison', "IPX de nouveau joignable :" . $commande, $headers);
     }
     $retour = write_trace("Watchdog OK");
     echo '<br> Watchdog OK<br>';
@@ -91,5 +92,5 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
 $result = curl_exec($ch);
  echo'<br> retour curl :'. $result  ; 
   
-echo '<br> Fin setwatchdog : ';
+echo '<br> Fin setwatchdog';
 ?>
